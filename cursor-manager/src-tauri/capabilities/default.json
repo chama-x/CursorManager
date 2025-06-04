@@ -1,0 +1,108 @@
+{
+  "$schema": "../gen/schemas/desktop-schema.json",
+  "identifier": "default",
+  "description": "Default window capability for Cursor Session Manager",
+  "windows": ["main"],
+  "permissions": [
+    "core:default",
+    "path:default", 
+    {
+      "identifier": "fs:allow-read-dir",
+      "scope": { 
+        "allow": [
+          "$HOME/cursor-profiles",
+          "$HOME/cursor-archives"
+        ]
+      }
+    },
+    {
+      "identifier": "fs:allow-create-dir",
+      "scope": { 
+        "allow": [
+          "$HOME/cursor-profiles",
+          "$HOME/cursor-archives"
+        ] 
+      }
+    },
+    {
+      "identifier": "fs:allow-write-file",
+      "scope": { 
+        "allow": [
+          "$HOME/cursor-profiles/**",
+          "$HOME/cursor-archives/**"
+        ] 
+      }
+    },
+    {
+      "identifier": "fs:allow-read-file",
+      "scope": { 
+        "allow": [
+          "$HOME/cursor-profiles/**",
+          "$HOME/cursor-archives/**"
+        ]
+      }
+    },
+    {
+      "identifier": "fs:allow-remove-dir",
+      "scope": { 
+        "allow": [
+          "$HOME/cursor-profiles/**",
+          "$HOME/cursor-archives/**"
+        ]
+      }
+    },
+    {
+      "identifier": "fs:allow-remove-file",
+      "scope": { 
+        "allow": [
+          "$HOME/cursor-profiles/**",
+          "$HOME/cursor-archives/**"
+        ]
+      }
+    },
+    {
+      "identifier": "fs:allow-copy-file",
+      "scope": { 
+        "allow": [
+          "$HOME/cursor-profiles/**",
+          "$HOME/cursor-archives/**"
+        ]
+      }
+    },
+    {
+      "identifier": "shell:allow-execute",
+      "scope": [
+        { 
+          "name": "sudo-networksetup-off", 
+          "cmd": "sudo", 
+          "args": ["networksetup", "-setairportpower", {"validator": ".+"}, "off"]
+        },
+        { 
+          "name": "sudo-networksetup-on", 
+          "cmd": "sudo", 
+          "args": ["networksetup", "-setairportpower", {"validator": ".+"}, "on"]
+        },
+        { 
+          "name": "sudo-ifconfig-ether", 
+          "cmd": "sudo", 
+          "args": ["/sbin/ifconfig", {"validator": ".+"}, "ether", {"validator": "([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})"}]
+        },
+        { 
+          "name": "ifconfig-check", 
+          "cmd": "ifconfig", 
+          "args": [{ "validator": ".+" }]
+        }
+      ]
+    },
+    {
+        "identifier": "shell:allow-spawn",
+        "scope": [
+            { 
+              "name": "cursor-app-spawn", 
+              "cmd": "/Applications/Cursor.app/Contents/MacOS/Cursor", 
+              "args": true
+            }
+        ]
+    }
+  ]
+}
